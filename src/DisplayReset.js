@@ -27,11 +27,13 @@ const DisplayReset = props => {
           value={params.size}
           onChange={event => {
             event.preventDefault();
-
-            setParams({
-              size: Number(event.target.value),
-              victory: params.victory
-            });
+            if (!isNaN(Number(event.target.value))) {
+              setParams({
+                size:
+                  event.target.value !== "" ? Number(event.target.value) : "",
+                victory: params.victory
+              });
+            }
           }}
         ></input>
         <h2>Victory align</h2>
@@ -42,11 +44,13 @@ const DisplayReset = props => {
           value={params.victory}
           onChange={event => {
             event.preventDefault();
-
-            setParams({
-              size: params.size,
-              victory: Number(event.target.value)
-            });
+            if (!isNaN(Number(event.target.value))) {
+              setParams({
+                size: params.size,
+                victory:
+                  event.target.value !== "" ? Number(event.target.value) : ""
+              });
+            }
           }}
         ></input>
         <h2></h2>
