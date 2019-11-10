@@ -19,7 +19,7 @@ const checkRows = (grid, r, c, player, victorynum) => {
   }
 
   //Check Total
-  if (sumRight + sumLeft === victorynum - 1) {
+  if (sumRight + sumLeft >= victorynum - 1) {
     victory.map(el => {
       grid[el[0]][el[1]] = "Win" + player;
     });
@@ -51,7 +51,91 @@ const checkCols = (grid, r, c, player, victorynum) => {
   }
 
   //Check Total
-  if (sumUp + sumDown === victorynum - 1) {
+  if (sumUp + sumDown >= victorynum - 1) {
+    victory.map(el => {
+      grid[el[0]][el[1]] = "Win" + player;
+    });
+    grid[r][c] = "Win" + player;
+
+    return grid;
+  }
+  return null;
+};
+
+const checkdiag1 = (grid, r, c, player, victorynum) => {
+  const size = grid[0].length;
+  let victory = [];
+  //check up
+  let currLign = r - 1;
+  let currCol = c - 1;
+  let sumUp = 0;
+  while (currLign >= 0 && currCol >= 0 && grid[currLign][currCol] === player) {
+    sumUp += 1;
+    victory.push([currLign, currCol]);
+    currLign--;
+    currCol--;
+  }
+  //check Up
+  currLign = r + 1;
+  currCol = c + 1;
+  let sumDown = 0;
+  while (
+    currLign < size &&
+    currCol < size &&
+    grid[currLign][currCol] === player
+  ) {
+    sumDown += 1;
+    victory.push([currLign, currCol]);
+    currLign++;
+    currCol++;
+  }
+
+  //Check Total
+  if (sumUp + sumDown >= victorynum - 1) {
+    victory.map(el => {
+      grid[el[0]][el[1]] = "Win" + player;
+    });
+    grid[r][c] = "Win" + player;
+
+    return grid;
+  }
+  return null;
+};
+
+const checkdiag2 = (grid, r, c, player, victorynum) => {
+  const size = grid[0].length;
+  let victory = [];
+  //check up
+  let currLign = r - 1;
+  let currCol = c + 1;
+  let sumUp = 0;
+  while (
+    currLign >= 0 &&
+    currCol < size &&
+    grid[currLign][currCol] === player
+  ) {
+    sumUp += 1;
+    victory.push([currLign, currCol]);
+    currLign--;
+    currCol++;
+  }
+  //check Up
+  currLign = r + 1;
+  currCol = c - 1;
+  let sumDown = 0;
+  while (
+    currLign < size &&
+    currCol >= 0 &&
+    grid[currLign][currCol] === player
+  ) {
+    sumDown += 1;
+    victory.push([currLign, currCol]);
+    currLign++;
+    currCol--;
+  }
+
+  //Check Total
+  if (sumUp + sumDown >= victorynum - 1) {
     victory.map(el => {
       grid[el[0]][el[1]] = "Win" + player;
     });
@@ -63,19 +147,20 @@ const checkCols = (grid, r, c, player, victorynum) => {
 };
 
 const checkWin = (grid, r, c, player, victory) => {
-  // let checkColss = checkCols(grid);
-  // if (checkColss) {
-  //   return checkColss;
-  // }
-  let checkRowss = checkRows(grid, r, c, player, victory);
-  // if (checkRowss) {
-  if (checkRowss) {
-    return checkRowss;
+  let check = checkRows(grid, r, c, player, victory);
+  if (check) {
+    return check;
   }
-  return checkCols(grid, r, c, player, victory);
-  // }
+  check = checkCols(grid, r, c, player, victory);
+  if (check) {
+    return check;
+  }
+  check = checkdiag1(grid, r, c, player, victory);
+  if (check) {
+    return check;
+  }
 
-  // return CheckDiag(grid);
+  return checkdiag2(grid, r, c, player, victory);
 };
 
 export default checkWin;
