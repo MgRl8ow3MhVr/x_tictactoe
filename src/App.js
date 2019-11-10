@@ -28,11 +28,15 @@ const App = () => {
   return (
     <div className="App">
       <header>Giant TIC TAC TOE</header>
+      <h3>
+        X plays vs O <br></br>player gets 1 point per aligment vertical
+        horizontal or diagonal{" "}
+      </h3>
 
       <div className="game">
         <div className="sidemenu">
           <div className="conditions">
-            <h2>Victory: align {TTT.victory} </h2>
+            <h2>1 point per align {TTT.victory} </h2>
 
             <h2>Currentplayer: {TTT.player}</h2>
           </div>

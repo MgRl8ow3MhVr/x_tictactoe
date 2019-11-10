@@ -27,7 +27,11 @@ h1 {
   font-family: "McLaren", cursive;
   font-size: 1.2rem;
 }
-
+h3 {
+  font-family: "McLaren", cursive;
+  font-size: 0.8rem;
+  text-align: center;
+}
 .sidemenu {
   display: flex;
   flex-direction: column;
