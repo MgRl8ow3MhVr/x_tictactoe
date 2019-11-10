@@ -1,22 +1,64 @@
 .App {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+
+section {
+  display: flex;
+}
+h1 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.box {
+  height: 30px;
+  width: 30px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  font-size: 3rem;
+  border-style: solid;
+  border-width: 1px;
+  transition: all 0.5s linear;
 }
 
-.App-link {
-  color: #09d3ac;
+.O {
+  background-color: rgb(114, 216, 241);
+}
+.X {
+  background-color: rgb(249, 164, 6);
+}
+.empty {
+  background-color: rgb(179, 129, 37);
+}
+.Win {
+  background-color: rgb(58, 218, 58);
+  animation: winner 3s infinite;
+}
+
+@keyframes winner {
+  0% {
+    background-color: rgb(58, 218, 58);
+  }
+  20% {
+    background-color: rgb(59, 161, 59);
+  }
+  40% {
+    background-color: rgb(58, 218, 58);
+  }
+  60% {
+    background-color: rgb(59, 161, 59);
+  }
+  80% {
+    background-color: rgb(58, 218, 58);
+  }
+  100% {
+    background-color: rgb(59, 161, 59);
+  }
+}
+
+.end {
+  font-size: 3rem;
+  background-color: orange;
 }
