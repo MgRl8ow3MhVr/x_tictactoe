@@ -1,4 +1,4 @@
-const checkRows = (grid, r, c, player) => {
+const checkRows = (grid, r, c, player, victorynum) => {
   const size = grid[0].length;
   let victory = [];
   //check right
@@ -9,7 +9,6 @@ const checkRows = (grid, r, c, player) => {
     victory.push([r, currCol]);
     currCol++;
   }
-  console.log("sumRight", sumRight);
   //check left
   currCol = c - 1;
   let sumLeft = 0;
@@ -18,74 +17,62 @@ const checkRows = (grid, r, c, player) => {
     victory.push([r, currCol]);
     currCol--;
   }
-  console.log("sumLeft", sumLeft);
 
   //Check Total
-  if (sumRight + sumLeft === 3) {
+  if (sumRight + sumLeft === victorynum - 1) {
     victory.map(el => {
-      grid[el[0]][el[1]] = "Win";
-      grid[r][c] = "Win";
+      grid[el[0]][el[1]] = "Win" + player;
     });
+    grid[r][c] = "Win" + player;
+
     return grid;
   }
   return null;
 };
 
-// const checkCols = grid => {
-//   const size = grid[0].length;
-//   for (let i = 0; i < size; i++) {
-//     let sum = 0;
-//     for (let j = 0; j < size; j++) {
-//       sum += grid[j][i];
-//     }
-//     if (sum === size || sum === 0) {
-//       //changer les cases
-//       for (let j = 0; j < size; j++) {
-//         grid[j][i] = "Win";
-//       }
-//       return grid;
-//     }
-//   }
-//   return null;
-// };
+const checkCols = (grid, r, c, player, victorynum) => {
+  const size = grid[0].length;
+  let victory = [];
+  //check up
+  let currLign = r - 1;
+  let sumUp = 0;
+  while (currLign >= 0 && grid[currLign][c] === player) {
+    sumUp += 1;
+    victory.push([currLign, c]);
+    currLign--;
+  }
+  //check Up
+  currLign = r + 1;
+  let sumDown = 0;
+  while (currLign < size && grid[currLign][c] === player) {
+    sumDown += 1;
+    victory.push([currLign, c]);
+    currLign++;
+  }
 
-// const CheckDiag = grid => {
-//   const size = grid[0].length;
-//   let sum = 0;
-//   //Diagonale 1
-//   for (let i = 0; i < size; i++) {
-//     sum += grid[i][i];
-//   }
-//   if (sum === size || sum === 0) {
-//     //changer les cases
-//     for (let j = 0; j < size; j++) {
-//       grid[j][j] = "Win";
-//     }
-//     return grid;
-//   }
-//   sum = 0;
-//   for (let i = 0; i < size; i++) {
-//     sum += grid[i][size - 1 - i];
-//   }
-//   if (sum === size || sum === 0) {
-//     //changer les cases
-//     for (let j = 0; j < size; j++) {
-//       grid[j][size - 1 - j] = "Win";
-//     }
-//     return grid;
-//   }
+  //Check Total
+  if (sumUp + sumDown === victorynum - 1) {
+    victory.map(el => {
+      grid[el[0]][el[1]] = "Win" + player;
+    });
+    grid[r][c] = "Win" + player;
 
-//   return null;
-// };
+    return grid;
+  }
+  return null;
+};
 
-const checkWin = (grid, r, c, player) => {
+const checkWin = (grid, r, c, player, victory) => {
   // let checkColss = checkCols(grid);
   // if (checkColss) {
   //   return checkColss;
   // }
-  let checkRowss = checkRows(grid, r, c, player);
+  let checkRowss = checkRows(grid, r, c, player, victory);
   // if (checkRowss) {
-  return checkRowss;
+  if (checkRowss) {
+    return checkRowss;
+  }
+  return checkCols(grid, r, c, player, victory);
   // }
 
   // return CheckDiag(grid);

@@ -15,19 +15,34 @@ const OneBox = props => {
         <div
           onClick={() => {
             grid[r][c] = player;
-            let gridwin = checkWin(grid, r, c, player);
+            let gridwin = checkWin(grid, r, c, player, TTT.victory);
             if (gridwin) {
-              console.log("WIN");
-              setTTT({ grid: gridwin, player: player, win: true });
+              setTTT({
+                grid: gridwin,
+                player: nextplayer,
+                size: TTT.size,
+                victory: TTT.victory,
+                scoreX: player === "X" ? TTT.scoreX + 1 : TTT.scoreX,
+                scoreO: player === "O" ? TTT.scoreO + 1 : TTT.scoreO
+              });
             } else {
-              setTTT({ grid: grid, player: nextplayer });
+              setTTT({
+                grid: grid,
+                player: nextplayer,
+                size: TTT.size,
+                victory: TTT.victory,
+                scoreX: TTT.scoreX,
+                scoreO: TTT.scoreO
+              });
             }
           }}
           className="box empty"
         ></div>
       );
-    case "Win":
-      return <div className="box Win">{player}</div>;
+    case "WinO":
+      return <div className="box WinO">O</div>;
+    case "WinX":
+      return <div className="box WinX">X</div>;
     case "O":
       return <div className="box O">O</div>;
     case "X":

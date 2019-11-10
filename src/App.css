@@ -1,8 +1,73 @@
-.App {
-  position: absolute;
-  top: 25%;
-  left: 25%;
+body {
+  background-color: rgb(172, 221, 238);
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  margin: 30px;
+  font-size: 2.5rem;
+  font-family: "ZCOOL KuaiLe", cursive;
+}
+
+h2 {
+  font-family: "McLaren", cursive;
+  font-size: 1rem;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  margin: 4px;
+}
+h1 {
+  font-family: "McLaren", cursive;
+  font-size: 1.2rem;
+}
+
+.sidemenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.score {
+  font-family: "McLaren", cursive;
+  font-size: 1.4rem;
+  background-color: rgb(130, 146, 177);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+  /* color: rgb(194, 194, 186); */
+}
+.conditions {
+  background-color: rgb(88, 170, 238);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+  transform: scale(0.8);
+}
+
+.game {
+  /* position: absolute; */
+  /* top: 25%; */
+  /* left: 25%; */
+  display: flex;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 8px;
+}
+
+/* # # # # # # # MATRICE # # # # # # # # # */
 
 section {
   display: flex;
@@ -17,48 +82,79 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
+  font-size: 150%;
   border-style: solid;
   border-width: 1px;
   transition: all 0.5s linear;
 }
 
-.O {
-  background-color: rgb(114, 216, 241);
+@keyframes clignote {
+  0% {
+    opacity: 0.7;
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 .X {
   background-color: rgb(249, 164, 6);
+  animation: clignote 0.6s;
 }
+.O {
+  background-color: rgb(26, 130, 179);
+  animation: clignote 0.6s;
+}
+
 .empty {
   background-color: rgb(179, 129, 37);
 }
-.Win {
-  background-color: rgb(58, 218, 58);
-  animation: winner 3s infinite;
+.WinO {
+  background-color: rgb(117, 184, 215);
+  animation: winner 1s infinite;
+}
+.WinX {
+  background-color: rgb(255, 212, 132);
+  animation: winner 1s infinite;
 }
 
 @keyframes winner {
   0% {
-    background-color: rgb(58, 218, 58);
+    opacity: 0.7;
   }
-  20% {
-    background-color: rgb(59, 161, 59);
-  }
-  40% {
-    background-color: rgb(58, 218, 58);
-  }
-  60% {
-    background-color: rgb(59, 161, 59);
-  }
-  80% {
-    background-color: rgb(58, 218, 58);
+
+  50% {
+    opacity: 1;
   }
   100% {
-    background-color: rgb(59, 161, 59);
+    opacity: 0.7;
   }
 }
 
-.end {
-  font-size: 3rem;
-  background-color: orange;
+/* # # # # # # # FORMS # # # # # # # # # */
+.reset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+  transform: scale(0.8);
+  background-color: rgb(88, 170, 238);
+  padding: 10px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  width: 80px;
+  text-align: center;
 }

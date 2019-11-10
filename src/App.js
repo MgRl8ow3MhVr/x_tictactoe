@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CreateGrid from "./CreateGrid";
-import displayEnd from "./DisplayEnd";
+import DisplayEnd from "./DisplayReset";
 import "./App.css";
 
 const thegrid = size => {
@@ -18,21 +18,49 @@ const thegrid = size => {
 const App = () => {
   const [TTT, setTTT] = useState({
     grid: thegrid(12),
-    player: "X"
+    player: "X",
+    size: 12,
+    victory: 4,
+    scoreX: 0,
+    scoreO: 0
   });
-
+  console.log(TTT);
   return (
     <div className="App">
-      <CreateGrid TTT={TTT} setTTT={setTTT} size={12} />
+      <header>Giant TIC TAC TOE</header>
 
-      <h1>{TTT.player ? "X" : "O"} PLAYS</h1>
+      <div className="game">
+        <div className="sidemenu">
+          <div className="conditions">
+            <h2>Victory: align {TTT.victory} </h2>
 
-      {displayEnd(TTT.win, () => {
-        setTTT({
-          grid: thegrid(12),
-          player: "X"
-        });
-      })}
+            <h2>Currentplayer: {TTT.player}</h2>
+          </div>
+          <div className="score">
+            <h2>Score</h2>
+            <h2>X: {TTT.scoreX}</h2>
+            <h2>O: {TTT.scoreO}</h2>
+          </div>
+
+          <DisplayEnd
+            win={TTT.win}
+            reset={params => {
+              setTTT({
+                grid: thegrid(params.size),
+                player: "X",
+                size: params.size,
+                victory: params.victory,
+                scoreX: 0,
+                scoreO: 0
+              });
+            }}
+          ></DisplayEnd>
+        </div>
+
+        <div className="board">
+          <CreateGrid TTT={TTT} setTTT={setTTT} />
+        </div>
+      </div>
     </div>
   );
 };
