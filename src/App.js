@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CreateGrid from "./CreateGrid";
-import DisplayEnd from "./DisplayReset";
+import DisplayReset from "./DisplayReset";
 import "./App.css";
 
 const thegrid = size => {
@@ -46,7 +46,7 @@ const App = () => {
             <h2>O: {TTT.scoreO}</h2>
           </div>
 
-          <DisplayEnd
+          <DisplayReset
             win={TTT.win}
             reset={params => {
               setTTT({
@@ -58,7 +58,7 @@ const App = () => {
                 scoreO: 0
               });
             }}
-          ></DisplayEnd>
+          ></DisplayReset>
         </div>
 
         <div className="board">
