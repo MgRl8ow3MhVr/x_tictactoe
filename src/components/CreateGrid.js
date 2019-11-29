@@ -20,7 +20,7 @@ const CreateGrid = props => {
   let tab = [];
   for (let i = 0; i < size; i++) {
     tab.push(
-      <OneLine TTT={TTT} setTTT={setTTT} size={size} line={i}></OneLine>
+      <OneLine key={i} TTT={TTT} setTTT={setTTT} size={size} line={i}></OneLine>
     );
   }
   return tab;

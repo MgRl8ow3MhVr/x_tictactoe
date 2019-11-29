@@ -7,7 +7,7 @@ const OneBox = props => {
   let grid = TTT.grid;
   let player = TTT.player;
   let nextplayer = player === "X" ? "O" : "X";
-  console.log(nextplayer);
+  // console.log(nextplayer);
 
   switch (state) {
     case -10:

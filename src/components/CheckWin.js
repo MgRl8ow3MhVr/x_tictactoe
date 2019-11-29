@@ -22,6 +22,7 @@ const checkRows = (grid, r, c, player, victorynum) => {
   if (sumRight + sumLeft >= victorynum - 1) {
     victory.map(el => {
       grid[el[0]][el[1]] = "Win" + player;
+      return null;
     });
     grid[r][c] = "Win" + player;
 
@@ -54,6 +55,7 @@ const checkCols = (grid, r, c, player, victorynum) => {
   if (sumUp + sumDown >= victorynum - 1) {
     victory.map(el => {
       grid[el[0]][el[1]] = "Win" + player;
+      return null;
     });
     grid[r][c] = "Win" + player;
 
@@ -94,6 +96,7 @@ const checkdiag1 = (grid, r, c, player, victorynum) => {
   if (sumUp + sumDown >= victorynum - 1) {
     victory.map(el => {
       grid[el[0]][el[1]] = "Win" + player;
+      return null;
     });
     grid[r][c] = "Win" + player;
 
@@ -138,6 +141,7 @@ const checkdiag2 = (grid, r, c, player, victorynum) => {
   if (sumUp + sumDown >= victorynum - 1) {
     victory.map(el => {
       grid[el[0]][el[1]] = "Win" + player;
+      return null;
     });
     grid[r][c] = "Win" + player;
 

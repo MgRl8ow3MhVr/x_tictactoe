@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import CreateGrid from "./CreateGrid";
-import DisplayReset from "./DisplayReset";
+import CreateGrid from "./components/CreateGrid";
+import DisplayReset from "./components/DisplayReset";
+// import Communicate2 from "./components/Communicate2";
+import Communicate from "./components/Communicate";
 import "./App.css";
 
 const thegrid = size => {
@@ -24,7 +26,6 @@ const App = () => {
     scoreX: 0,
     scoreO: 0
   });
-  console.log(TTT);
   return (
     <div className="App">
       <header>Giant TIC TAC TOE</header>
@@ -32,6 +33,7 @@ const App = () => {
         X plays vs O <br></br>player gets 1 point per aligment vertical
         horizontal or diagonal{" "}
       </h3>
+      <Communicate TTT={TTT} setTTT={setTTT} />
 
       <div className="game">
         <div className="sidemenu">
@@ -47,7 +49,7 @@ const App = () => {
           </div>
 
           <DisplayReset
-            win={TTT.win}
+            // win={TTT.win}
             reset={params => {
               setTTT({
                 grid: thegrid(params.size),

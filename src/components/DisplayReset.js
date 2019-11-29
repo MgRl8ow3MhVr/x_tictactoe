@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const DisplayReset = props => {
-  const { win, reset } = props;
+  const { reset } = props;
   const [params, setParams] = useState({ size: 12, victory: 4 });
   return (
     <div className="reset">
@@ -53,7 +53,6 @@ const DisplayReset = props => {
             }
           }}
         ></input>
-        <h2></h2>
 
         <input type="submit" value="New Game"></input>
       </form>
