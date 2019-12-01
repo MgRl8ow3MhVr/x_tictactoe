@@ -10,7 +10,8 @@ class Communicate extends React.Component {
   };
 
   componentDidMount() {
-    this.ws = new WebSocket("ws://backendtictactoe.herokuapp.com/");
+    // this.ws = new WebSocket("ws://backendtictactoe.herokuapp.com/");
+    this.ws = new WebSocket("ws://localhost:8080");
     this.ws.addEventListener("message", event => {
       const response = JSON.parse(event.data);
       switch (response.object) {
@@ -105,7 +106,8 @@ class Communicate extends React.Component {
                   );
                 }}
               >
-                <h2>Enter UserName to find players</h2>
+                <h2>Enter your own UserName to find other connected players</h2>
+                <h2>Then clic on a player name to start a game against him</h2>
 
                 <input
                   type="text"
