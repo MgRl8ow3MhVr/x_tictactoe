@@ -8,8 +8,6 @@ const DisplayReset = props => {
       <h1>Reset Board</h1>
       <form
         onSubmit={event => {
-          // alert(params.size);
-          // alert(params.victory);
           event.preventDefault();
 
           if (params.size > 1 && params.victory <= params.size) {

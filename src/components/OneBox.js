@@ -6,33 +6,33 @@ const OneBox = props => {
   let state = TTT.grid[r][c];
   let grid = TTT.grid;
   let player = TTT.player;
-  let nextplayer = player === "X" ? "O" : "X";
-  // console.log(nextplayer);
 
   switch (state) {
     case -10:
       return (
         <div
           onClick={() => {
+            if (!TTT.allowedToPlay) {
+              alert("wait for your turn");
+              return;
+            }
             grid[r][c] = player;
             let gridwin = checkWin(grid, r, c, player, TTT.victory);
             if (gridwin) {
               setTTT({
+                ...TTT,
                 grid: gridwin,
-                player: nextplayer,
-                size: TTT.size,
-                victory: TTT.victory,
                 scoreX: player === "X" ? TTT.scoreX + 1 : TTT.scoreX,
-                scoreO: player === "O" ? TTT.scoreO + 1 : TTT.scoreO
+                scoreO: player === "O" ? TTT.scoreO + 1 : TTT.scoreO,
+                lastPlayed: [r, c],
+                allowedToPlay: false
               });
             } else {
               setTTT({
+                ...TTT,
                 grid: grid,
-                player: nextplayer,
-                size: TTT.size,
-                victory: TTT.victory,
-                scoreX: TTT.scoreX,
-                scoreO: TTT.scoreO
+                lastPlayed: [r, c],
+                allowedToPlay: false
               });
             }
           }}
