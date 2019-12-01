@@ -107,7 +107,10 @@ class Communicate extends React.Component {
                 }}
               >
                 <h2>Enter your own UserName to find other connected players</h2>
-                <h2>Then clic on a player name to start a game against him</h2>
+                <h2>
+                  Then clic on a player name to start a game against him || OR
+                  || wait that someone invites you
+                </h2>
 
                 <input
                   type="text"
