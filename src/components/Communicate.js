@@ -10,8 +10,8 @@ class Communicate extends React.Component {
   };
 
   componentDidMount() {
-    // this.ws = new WebSocket("ws://backendtictactoe.herokuapp.com/");
-    this.ws = new WebSocket("ws://localhost:8080");
+    this.ws = new WebSocket("ws://backendtictactoe.herokuapp.com/");
+    // this.ws = new WebSocket("ws://localhost:8080");
     this.ws.addEventListener("message", event => {
       const response = JSON.parse(event.data);
       switch (response.object) {
