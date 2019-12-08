@@ -2,7 +2,7 @@ import React from "react";
 import checkWin from "./CheckWin";
 
 const OneBox = props => {
-  const { TTT, setTTT, r, c } = props;
+  const { TTT, setTTT, r, c, ws } = props;
   let state = TTT.grid[r][c];
   let grid = TTT.grid;
   let player = TTT.player;
@@ -35,6 +35,12 @@ const OneBox = props => {
                 allowedToPlay: false
               });
             }
+            ws.send(
+              JSON.stringify({
+                ...TTT,
+                grid: grid
+              })
+            );
           }}
           className="box empty"
         ></div>

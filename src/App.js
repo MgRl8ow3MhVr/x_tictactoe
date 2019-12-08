@@ -1,23 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CreateGrid from "./components/CreateGrid";
 import Communicate from "./components/Communicate";
 import SideMenu from "./components/SideMenu";
-
+import thegrid from "./components/TheGrid";
 import "./App.css";
-
-const thegrid = size => {
-  let tab = [];
-  for (let i = 0; i < size; i++) {
-    let subtab = [];
-    for (let j = 0; j < size; j++) {
-      subtab.push(-10);
-    }
-    tab.push(subtab);
-  }
-  return tab;
-};
+// import Connection from "./components/Connection";
 
 const App = () => {
+  const [ws, setWs] = useState(null);
+
   const [TTT, setTTT] = useState({
     grid: thegrid(12),
     player: null,
@@ -27,25 +18,21 @@ const App = () => {
     scoreO: 0,
     lastPlayed: [null, null],
     allowedToPlay: false,
-    username: "?????",
-    opponent: "?????"
+    username: "NoUsername Yet",
+    opponent: "NoOpponent Yet"
   });
+  console.log(TTT);
 
   return (
     <div className="App">
       <header>Giant TIC TAC TOE</header>
-      <Communicate TTT={TTT} setTTT={setTTT} />
-
-      {/* <h3>
-        X plays vs O <br></br>player gets 1 point per aligment vertical
-        horizontal or diagonal{" "}
-      </h3> */}
+      <Communicate TTT={TTT} setTTT={setTTT} ws={ws} setWs={setWs} />
 
       <div className="game">
         <SideMenu TTT={TTT} setTTT={setTTT} thegrid={thegrid} />
 
         <div className="board">
-          <CreateGrid TTT={TTT} setTTT={setTTT} />
+          <CreateGrid TTT={TTT} setTTT={setTTT} ws={ws} />
         </div>
       </div>
     </div>

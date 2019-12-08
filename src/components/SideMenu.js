@@ -8,10 +8,10 @@ const SideMenu = ({ TTT, setTTT, thegrid }) => {
         <div className="score">
           <h2>Score</h2>
           <h2>
-            {TTT.username}: {TTT.scoreX}
+            {TTT.username + " (YOU)"}: {TTT.scoreX}
           </h2>
           <h2>
-            {TTT.opponent}: {TTT.scoreO}
+            {TTT.opponent + "(Opponent)"}: {TTT.scoreO}
           </h2>
         </div>
         <div className="conditions">
