@@ -38,8 +38,8 @@ const Communicate = ({ TTT, setTTT, ws, setWs }) => {
 
   useEffect(() => {
     const connection = () => {
-      // this.ws = new WebSocket("wss://backendtictactoe.herokuapp.com/");
-      const NewWs = new WebSocket("ws://localhost:8080");
+      this.ws = new WebSocket("wss://backendtictactoe.herokuapp.com/");
+      // const NewWs = new WebSocket("ws://localhost:8080");
 
       setWs(NewWs);
     };
