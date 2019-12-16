@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 console.log("Communicate Load");
 
-const Communicate = ({ TTT, setTTT, ws, setWs }) => {
+const Communicate = ({
+  TTT,
+  setTTT,
+  ws,
+  setWs,
+  gamestarted,
+  setGameStarted
+}) => {
   const [playersList, setPlayersList] = useState([]);
   const [connected, setConnected] = useState(false);
-  const [gamestarted, setGameStarted] = useState(false);
   const [theUserName, setTheUserName] = useState(null);
 
   const handleReceive = event => {

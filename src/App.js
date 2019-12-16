@@ -8,6 +8,7 @@ import "./App.css";
 
 const App = () => {
   const [ws, setWs] = useState(null);
+  const [gamestarted, setGameStarted] = useState(false);
 
   const [TTT, setTTT] = useState({
     grid: thegrid(12),
@@ -26,11 +27,16 @@ const App = () => {
   return (
     <div className="App">
       <header>Giant TIC TAC TOE</header>
-      <Communicate TTT={TTT} setTTT={setTTT} ws={ws} setWs={setWs} />
-
+      <Communicate
+        TTT={TTT}
+        setTTT={setTTT}
+        ws={ws}
+        setWs={setWs}
+        gamestarted={gamestarted}
+        setGameStarted={setGameStarted}
+      />
+      {gamestarted && <SideMenu TTT={TTT} setTTT={setTTT} thegrid={thegrid} />}
       <div className="game">
-        <SideMenu TTT={TTT} setTTT={setTTT} thegrid={thegrid} />
-
         <div className="board">
           <CreateGrid TTT={TTT} setTTT={setTTT} ws={ws} />
         </div>
