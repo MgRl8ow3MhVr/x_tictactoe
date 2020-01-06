@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
-console.log("Communicate Load");
-//test git change 3
+import PlayersList from "./PlayersList";
+import Connexion from "./Connexion";
+import SideMenu from "./SideMenu";
+import Typing from "react-typing-animation";
 
-const Communicate = ({
-  TTT,
-  setTTT,
-  ws,
-  setWs,
-  gamestarted,
-  setGameStarted
-}) => {
+const Communicate = ({ TTT, setTTT, ws, setWs }) => {
   const [playersList, setPlayersList] = useState([]);
-  const [connected, setConnected] = useState(false);
-  const [theUserName, setTheUserName] = useState(null);
 
+  // # # # # # # # # # # # Connexion at WS Server on page landing # # # # # # # # # # #
+  useEffect(() => {
+    const connection = () => {
+      // const NewWs = new WebSocket("wss://backendtictactoe.herokuapp.com/");
+      const NewWs = new WebSocket("ws://localhost:8080");
+      setWs(NewWs);
+    };
+    connection();
+  }, []);
+
+  // # # # # # # # # # # # Handling WS received messages # # # # # # # # # # #
   const handleReceive = event => {
     const response = JSON.parse(event.data);
     switch (response.object) {
@@ -22,13 +26,13 @@ const Communicate = ({
         setPlayersList(response.playersList);
         break;
       case "challenged":
-        setGameStarted(true);
         alert(`you be been challenged by ${response.by}. You START`);
         setTTT({
           ...TTT,
           opponent: response.by,
           allowedToPlay: true,
-          player: "X"
+          player: "X",
+          stage: "youplay"
         });
         break;
       default:
@@ -36,23 +40,12 @@ const Communicate = ({
         TTTcopy.lastPlayed = [null, null];
         TTTcopy.allowedToPlay = true;
         TTTcopy.grid = response.grid;
-        // TTTcopy.scoreX = response.scoreX;
-        // TTTcopy.scoreO = response.scoreO;
+
         setTTT(TTTcopy);
         break;
     }
   };
-
-  useEffect(() => {
-    const connection = () => {
-      const NewWs = new WebSocket("wss://backendtictactoe.herokuapp.com/");
-      // const NewWs = new WebSocket("ws://localhost:8080");
-
-      setWs(NewWs);
-    };
-    connection();
-  }, []);
-
+  // # # # # # # # # # # # Kill handler and create new one every message # # # # # # # # # # #
   useEffect(() => {
     if (ws) {
       ws.addEventListener("message", handleReceive);
@@ -64,83 +57,37 @@ const Communicate = ({
     };
   }, [handleReceive]);
 
+  // # # # # # # # # # # # R E N D E R # # # # # # # # # # #
+
   return (
     <>
-      <div className="starter">
-        {/* # # # # # # Players List # # # # #  */}
-        {!gamestarted && (
-          <div className="playerslist">
-            {playersList &&
-              playersList.map((player, index) => {
-                if (player !== TTT.username) {
-                  return (
-                    <h4
-                      key={index}
-                      onClick={() => {
-                        setTTT({
-                          ...TTT,
-                          opponent: player,
-                          player: "O"
-                        });
-                        setGameStarted(true);
-
-                        ws.send(
-                          JSON.stringify({
-                            object: "challenge",
-                            challenger: TTT.username,
-                            opponent: player
-                          })
-                        );
-                        alert(
-                          `You challenged ${player}. "He is X, you are O, wait that he plays first"`
-                        );
-                      }}
-                    >
-                      {player}
-                    </h4>
-                  );
-                } else {
-                  return null;
-                }
-              })}
-          </div>
-        )}
+      <div className="menu">
         {/* # # # # # # CONNEXION # # # # #  */}
-        {!connected && (
+        {TTT.stage === "entername" && (
           <>
-            <form
-              onSubmit={event => {
-                event.preventDefault();
-                setConnected(true);
-                setTTT({
-                  ...TTT,
-                  username: theUserName
-                });
-                ws.send(
-                  JSON.stringify({
-                    object: "enterArena",
-                    username: theUserName
-                  })
-                );
-              }}
-            >
-              <h2>Enter your own UserName to find other connected players</h2>
-              <h2>
-                Then clic on a player name to start a game against him || OR ||
-                wait that someone invites you
-              </h2>
-
-              <input
-                type="text"
-                onChange={event => {
-                  event.preventDefault();
-                  setTheUserName(event.target.value);
-                }}
-              ></input>
-
-              <input type="submit" value="find players"></input>
-            </form>
+            <Typing speed={10}>
+              <h2>Enter user name</h2>
+            </Typing>
+            <Connexion TTT={TTT} setTTT={setTTT} ws={ws} />
           </>
+        )}
+        {/* # # # # # # PLAYERS LIST # # # # #  */}
+        {TTT.stage === "findaplayer" && playersList && (
+          <>
+            <Typing speed={10}>
+              <h2>click on a playername to challenge him</h2>
+            </Typing>
+            <PlayersList
+              TTT={TTT}
+              setTTT={setTTT}
+              ws={ws}
+              playersList={playersList}
+            />
+          </>
+        )}
+        {/* # # # # # # GAME IS ON # # # # #  */}
+        {(TTT.stage === "youplay" || TTT.stage === "youwait") && (
+          <SideMenu TTT={TTT} />
         )}
       </div>
     </>

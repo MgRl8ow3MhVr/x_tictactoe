@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 import CreateGrid from "./components/CreateGrid";
 import Communicate from "./components/Communicate";
-import SideMenu from "./components/SideMenu";
 import thegrid from "./components/TheGrid";
 import "./App.css";
-// import Connection from "./components/Connection";
 
 const App = () => {
   const [ws, setWs] = useState(null);
-  const [gamestarted, setGameStarted] = useState(false);
 
   const [TTT, setTTT] = useState({
-    grid: thegrid(12),
+    grid: thegrid(30),
     player: null,
-    size: 12,
+    size: 15,
     victory: 4,
     scoreX: 0,
     scoreO: 0,
     lastPlayed: [null, null],
-    allowedToPlay: false,
+    stage: "entername",
     username: "NoUsername Yet",
     opponent: "NoOpponent Yet"
   });
@@ -27,15 +24,7 @@ const App = () => {
   return (
     <div className="App">
       <header>Giant TIC TAC TOE</header>
-      <Communicate
-        TTT={TTT}
-        setTTT={setTTT}
-        ws={ws}
-        setWs={setWs}
-        gamestarted={gamestarted}
-        setGameStarted={setGameStarted}
-      />
-      {gamestarted && <SideMenu TTT={TTT} setTTT={setTTT} thegrid={thegrid} />}
+      <Communicate TTT={TTT} setTTT={setTTT} ws={ws} setWs={setWs} />
       <div className="game">
         <div className="board">
           <CreateGrid TTT={TTT} setTTT={setTTT} ws={ws} />
@@ -46,3 +35,18 @@ const App = () => {
 };
 
 export default App;
+
+{
+  /* <DisplayReset
+          reset={params => {
+            setTTT({
+              grid: thegrid(params.size),
+              player: "X",
+              size: params.size,
+              victory: params.victory,
+              scoreX: 0,
+              scoreO: 0
+            });
+          }}
+        ></DisplayReset> */
+}

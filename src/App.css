@@ -1,5 +1,7 @@
+/* # # # # # # # # GENERAL THINGS # # # # # # # #  */
 body {
-  background-color: rgb(172, 221, 238);
+  background-color: rgb(91, 91, 91);
+  /* background-color: rgb(172, 221, 238); */
 }
 
 .App {
@@ -9,59 +11,72 @@ body {
 }
 
 header {
+  color: white;
   margin: 30px;
   font-size: 2.5rem;
   font-family: "ZCOOL KuaiLe", cursive;
 }
 
+/* # # # # # # # game MENU # # # # # # # # # */
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: solid; */
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
 h2 {
-  font-family: "McLaren", cursive;
+  /* font-family: "McLaren", cursive; */
+  font-family: "Slabo 27px", serif;
+  letter-spacing: 1px;
   font-size: 1rem;
   margin-block-start: 0em;
   margin-block-end: 0em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   margin: 4px;
-}
-h1 {
-  font-family: "McLaren", cursive;
-  font-size: 1.2rem;
-}
-h3 {
-  font-family: "McLaren", cursive;
-  font-size: 0.8rem;
-  text-align: center;
-}
-.sidemenu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: space-between; */
+  color: white;
 }
 
-.score {
-  font-family: "McLaren", cursive;
-  font-size: 1.4rem;
-  background-color: rgb(202, 106, 85);
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 8px;
-  /* color: rgb(194, 194, 186); */
+/* # # # # # # # Players List # # # # # # # # # */
+
+.playerslist {
+  min-height: 30px;
+  width: 100px;
+  overflow: scroll;
+  background-color: white;
+  border: solid black 2px;
 }
-.conditions {
-  background-color: rgb(88, 170, 238);
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 8px;
-  transform: scale(0.8);
+/* h4 for name of players */
+h4 {
+  font-size: 1rem;
+  margin: 0;
+}
+h4:hover {
+  cursor: pointer;
 }
 
-.game {
-  /* position: absolute; */
-  /* top: 25%; */
-  /* left: 25%; */
+/* # # # # # # # FORMS # # # # # # # # # */
+
+form {
   display: flex;
   /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  width: 80px;
+  text-align: center;
+}
+
+/* # # # # # # # # # # # # # # MATRICE # # # # # # # # # */
+
+.game {
+  display: flex;
 }
 
 .board {
@@ -72,45 +87,18 @@ h3 {
   border-radius: 8px;
 }
 
-/* # # # # # # # game Start # # # # # # # # # */
-
-.starter {
-  display: flex;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.playerslist {
-  height: 100px;
-  width: 70px;
-  overflow: scroll;
-  background-color: white;
-  border: solid black 2px;
-}
-h4 {
-  font-size: 1rem;
-  margin: 0;
-}
-h4:hover {
-  cursor: pointer;
-}
-
-/* # # # # # # # MATRICE # # # # # # # # # */
-
 section {
   display: flex;
 }
 h1 {
   text-align: center;
+  font-family: "McLaren", cursive;
+  font-size: 1.2rem;
 }
 
 .box {
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,27 +154,4 @@ h1 {
   100% {
     opacity: 0.7;
   }
-}
-
-/* # # # # # # # FORMS # # # # # # # # # */
-.reset {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 8px;
-  transform: scale(0.8);
-  background-color: rgb(88, 170, 238);
-  padding: 10px;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-input {
-  width: 80px;
-  text-align: center;
 }
