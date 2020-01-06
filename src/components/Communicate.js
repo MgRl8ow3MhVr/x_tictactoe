@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PlayersList from "./PlayersList";
 import Connexion from "./Connexion";
-import SideMenu from "./SideMenu";
-import Typing from "react-typing-animation";
+import ScoreMenu from "./ScoreMenu";
+import TypeMe from "./TypeMe";
+// import Typing from "react-typing-animation";
+// import Typist from "react-typist";
+// import ReactTypingEffect from "react-typing-effect";
 
 const Communicate = ({ TTT, setTTT, ws, setWs }) => {
   const [playersList, setPlayersList] = useState([]);
+  const [instruction, setInstruction] = useState("Enter UserName");
 
   // # # # # # # # # # # # Connexion at WS Server on page landing # # # # # # # # # # #
   useEffect(() => {
@@ -22,11 +26,10 @@ const Communicate = ({ TTT, setTTT, ws, setWs }) => {
     const response = JSON.parse(event.data);
     switch (response.object) {
       case "newUser":
-        console.log("newuser", response.playersList);
         setPlayersList(response.playersList);
         break;
       case "challenged":
-        alert(`you be been challenged by ${response.by}. You START`);
+        setInstruction(`you be been challenged by ${response.by}. You START`);
         setTTT({
           ...TTT,
           opponent: response.by,
@@ -58,36 +61,41 @@ const Communicate = ({ TTT, setTTT, ws, setWs }) => {
   }, [handleReceive]);
 
   // # # # # # # # # # # # R E N D E R # # # # # # # # # # #
-
   return (
     <>
       <div className="menu">
+        {/* Instructions side - menuleft */}
+        <div className="menuleft">
+          <TypeMe aText={instruction} />
+        </div>
         {/* # # # # # # CONNEXION # # # # #  */}
         {TTT.stage === "entername" && (
-          <>
-            <Typing speed={10}>
-              <h2>Enter user name</h2>
-            </Typing>
-            <Connexion TTT={TTT} setTTT={setTTT} ws={ws} />
-          </>
+          <div className="menuright">
+            <Connexion
+              TTT={TTT}
+              setTTT={setTTT}
+              ws={ws}
+              setInstruction={setInstruction}
+            />
+          </div>
         )}
         {/* # # # # # # PLAYERS LIST # # # # #  */}
         {TTT.stage === "findaplayer" && playersList && (
-          <>
-            <Typing speed={10}>
-              <h2>click on a playername to challenge him</h2>
-            </Typing>
+          <div className="menuright">
             <PlayersList
               TTT={TTT}
               setTTT={setTTT}
               ws={ws}
               playersList={playersList}
+              setInstruction={setInstruction}
             />
-          </>
+          </div>
         )}
         {/* # # # # # # GAME IS ON # # # # #  */}
         {(TTT.stage === "youplay" || TTT.stage === "youwait") && (
-          <SideMenu TTT={TTT} />
+          <div className="menuright">
+            <ScoreMenu TTT={TTT} />
+          </div>
         )}
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CreateGrid from "./components/CreateGrid";
 import Communicate from "./components/Communicate";
 import thegrid from "./components/TheGrid";
@@ -23,7 +23,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <header>Giant TIC TAC TOE</header>
+      <header>
+        <span>GIANT TIC TAC TOE</span>
+        <span>Challenge your friends online</span>
+      </header>
       <Communicate TTT={TTT} setTTT={setTTT} ws={ws} setWs={setWs} />
       <div className="game">
         <div className="board">
@@ -35,18 +38,3 @@ const App = () => {
 };
 
 export default App;
-
-{
-  /* <DisplayReset
-          reset={params => {
-            setTTT({
-              grid: thegrid(params.size),
-              player: "X",
-              size: params.size,
-              victory: params.victory,
-              scoreX: 0,
-              scoreO: 0
-            });
-          }}
-        ></DisplayReset> */
-}
