@@ -33,7 +33,7 @@ const PlayersList = ({ TTT, setTTT, ws, playersList, setInstruction }) => {
                   );
 
                   setInstruction(
-                    `You challenged ${player}. "He is X, you are O, wait that he plays first"`
+                    `You challenged ${player}. "He is X, you are O, he plays first"`
                   );
                 }}
               >

@@ -14,8 +14,8 @@ const Communicate = ({ TTT, setTTT, ws, setWs }) => {
   // # # # # # # # # # # # Connexion at WS Server on page landing # # # # # # # # # # #
   useEffect(() => {
     const connection = () => {
-      // const NewWs = new WebSocket("wss://backendtictactoe.herokuapp.com/");
-      const NewWs = new WebSocket("ws://localhost:8080");
+      const NewWs = new WebSocket("wss://backendtictactoe.herokuapp.com/");
+      // const NewWs = new WebSocket("ws://localhost:8080");
       setWs(NewWs);
     };
     connection();

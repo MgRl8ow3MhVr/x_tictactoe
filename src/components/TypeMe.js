@@ -10,7 +10,7 @@ const TypeMe = ({ aText }) => {
           setText(aString.slice(0, pos + 1));
           displayLetters(aString, pos + 1);
         }
-      }, 70);
+      }, 40);
     };
     displayLetters(aText, 0);
   }, [aText]);
