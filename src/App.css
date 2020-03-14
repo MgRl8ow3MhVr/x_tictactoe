@@ -14,7 +14,7 @@ header {
   color: white;
   margin: 30px;
 
-  font-family: "Slabo 27px", serif;
+  font-family: 'Slabo 27px', serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,7 +52,7 @@ header > span:last-child {
   max-width: calc(50% - 30px);
   color: white;
   font-size: 1rem;
-  font-family: "Slabo 27px", serif;
+  font-family: 'Slabo 27px', serif;
 }
 .menuleft span {
   color: white;
@@ -85,7 +85,7 @@ input {
   text-align: center;
   border-style: none;
   outline: none;
-  font-family: "Overpass Mono", monospace;
+  font-family: 'Overpass Mono', monospace;
   background-color: transparent;
   color: white;
 }
@@ -177,7 +177,7 @@ section {
 }
 h1 {
   text-align: center;
-  font-family: "McLaren", cursive;
+  font-family: 'McLaren', cursive;
   font-size: 1.2rem;
 }
 
@@ -190,18 +190,18 @@ h1 {
   font-size: 150%;
   border-style: solid;
   border-width: 1px;
-  transition: all 0.5s linear;
+  transition: all 0.25s ease;
 }
 
 @keyframes clignote {
   0% {
-    opacity: 0.7;
+    opacity: 0.9;
   }
   20% {
     opacity: 1;
   }
   40% {
-    opacity: 0.7;
+    opacity: 0.8;
   }
   50% {
     opacity: 1;
@@ -218,6 +218,10 @@ h1 {
 
 .empty {
   background-color: rgb(179, 129, 37);
+}
+
+.notallowed {
+  opacity: 0.7;
 }
 .WinO {
   background-color: rgb(117, 184, 215);

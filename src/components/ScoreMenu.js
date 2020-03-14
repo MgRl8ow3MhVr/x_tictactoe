@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
 // import DisplayReset from "./DisplayReset";
 
 const ScoreMenu = ({ TTT }) => {
   return (
     <>
-      <div className="scoretitle">Scores</div>
-      <div className="scoremenu">
-        {TTT.player === "X" ? (
+      <div className='scoretitle'>Scores</div>
+      <div className='scoremenu'>
+        {TTT.player === 'X' ? (
           <>
             <div>{TTT.username}</div>
             <div>{TTT.scoreX}</div>
@@ -16,14 +16,14 @@ const ScoreMenu = ({ TTT }) => {
         ) : (
           <>
             <div>{TTT.opponent}</div>
-            <div>{TTT.scoreO}</div>
             <div>{TTT.scoreX}</div>
+            <div>{TTT.scoreO}</div>
             <div>{TTT.username}</div>
           </>
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ScoreMenu;
+export default ScoreMenu

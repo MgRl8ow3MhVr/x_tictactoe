@@ -1,10 +1,10 @@
-import React from "react";
-import OneBox from "./OneBox";
+import React from 'react'
+import OneBox from './OneBox'
 
 const OneLine = props => {
-  const { TTT, setTTT, size, line, ws } = props;
+  const { TTT, setTTT, size, line, ws } = props
 
-  let tab = [];
+  let tab = []
   for (let i = 0; i < size; i++) {
     tab.push(
       <OneBox
@@ -15,16 +15,16 @@ const OneLine = props => {
         ws={ws}
         key={[line, i]}
       ></OneBox>
-    );
+    )
   }
 
-  return <section>{tab}</section>;
-};
+  return <section>{tab}</section>
+}
 
 const CreateGrid = props => {
-  const { TTT, setTTT, ws } = props;
-  let size = TTT.size;
-  let tab = [];
+  const { TTT, setTTT, ws } = props
+  let size = TTT.size
+  let tab = []
   for (let i = 0; i < size; i++) {
     tab.push(
       <OneLine
@@ -35,9 +35,9 @@ const CreateGrid = props => {
         line={i}
         ws={ws}
       ></OneLine>
-    );
+    )
   }
-  return tab;
-};
+  return tab
+}
 
-export default CreateGrid;
+export default CreateGrid
