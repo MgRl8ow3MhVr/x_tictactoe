@@ -1,37 +1,38 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 const Connexion = ({ TTT, setTTT, ws, setInstruction }) => {
-  const [theUserName, setTheUserName] = useState(null);
+  const [theUserName, setTheUserName] = useState(null)
 
   return (
     <>
       <form
         onSubmit={event => {
-          event.preventDefault();
+          event.preventDefault()
           setTTT({
             ...TTT,
             username: theUserName,
-            stage: "findaplayer"
-          });
+            stage: 'findaplayer'
+          })
           ws.send(
             JSON.stringify({
-              object: "enterArena",
+              object: 'enterArena',
               username: theUserName
             })
-          );
-          setInstruction("click on a playername to challenge him");
+          )
+          setInstruction('click on a playername to challenge him')
         }}
       >
         <input
-          type="text"
-          placeholder="type here"
+          type='text'
+          autoFocus
+          placeholder='type here'
           onChange={event => {
-            event.preventDefault();
-            setTheUserName(event.target.value);
+            event.preventDefault()
+            setTheUserName(event.target.value)
           }}
         ></input>
       </form>
     </>
-  );
-};
-export default Connexion;
+  )
+}
+export default Connexion

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import PlayersList from './PlayersList'
+import GameSettings from './GameSettings'
 import Connexion from './Connexion'
 import ScoreMenu from './ScoreMenu'
 import TypeMe from './TypeMe'
-// import Typing from "react-typing-animation";
-// import Typist from "react-typist";
-// import ReactTypingEffect from "react-typing-effect";
+import thegrid from './TheGrid'
 
 const Communicate = ({
   TTT,
@@ -20,8 +18,8 @@ const Communicate = ({
   // # # # # # # # # # # # Connexion at WS Server on page landing # # # # # # # # # # #
   useEffect(() => {
     const connection = async () => {
-      const NewWs = new WebSocket('wss://backendtictactoe.herokuapp.com/')
-      // const NewWs =  new WebSocket('ws://localhost:8080')
+      // const NewWs = new WebSocket('wss://backendtictactoe.herokuapp.com/')
+      const NewWs = new WebSocket('ws://localhost:8080')
       setWs(NewWs)
 
       //ping the server otherwise heroku goes to sleep and the game is lost after 30s of inactivity
@@ -41,15 +39,20 @@ const Communicate = ({
       case 'ping':
         ws.send(JSON.stringify('pong ' + TTT.username))
         break
-
       case 'newUser':
         setPlayersList(response.playersList)
         break
       case 'challenged':
-        setInstruction(`you've been challenged by ${response.by}. You START`)
+        console.log('challenged', response)
+        setInstruction(
+          `you've been challenged by ${response.challenger}. Win 1 point when align ${response.victory}. You are X. You START`
+        )
         setTTT({
           ...TTT,
-          opponent: response.by,
+          grid: thegrid(response.boardSize),
+          size: response.boardSize,
+          victory: response.victory,
+          opponent: response.challenger,
           allowedToPlay: true,
           player: 'X',
           stage: 'youplay'
@@ -99,34 +102,30 @@ const Communicate = ({
           <TypeMe aText={instruction} />
         </div>
         {/* # # # # # # CONNEXION # # # # #  */}
-        {TTT.stage === 'entername' && (
-          <div className='menuright'>
+        <div className='menuright'>
+          {TTT.stage === 'entername' && (
             <Connexion
               TTT={TTT}
               setTTT={setTTT}
               ws={ws}
               setInstruction={setInstruction}
             />
-          </div>
-        )}
-        {/* # # # # # # PLAYERS LIST # # # # #  */}
-        {TTT.stage === 'findaplayer' && playersList && (
-          <div className='menuright'>
-            <PlayersList
+          )}
+          {/* # # # # # # PLAYERS LIST # # # # #  */}
+          {TTT.stage === 'findaplayer' && playersList && (
+            <GameSettings
               TTT={TTT}
               setTTT={setTTT}
               ws={ws}
               playersList={playersList}
               setInstruction={setInstruction}
             />
-          </div>
-        )}
-        {/* # # # # # # GAME IS ON # # # # #  */}
-        {(TTT.stage === 'youplay' || TTT.stage === 'youwait') && (
-          <div className='menuright'>
+          )}
+          {/* # # # # # # GAME IS ON # # # # #  */}
+          {(TTT.stage === 'youplay' || TTT.stage === 'youwait') && (
             <ScoreMenu TTT={TTT} />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   )
