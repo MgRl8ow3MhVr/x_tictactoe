@@ -2,7 +2,7 @@ import React from 'react'
 import checkWin from './CheckWin'
 
 const OneBox = props => {
-  const { TTT, setTTT, r, c, ws } = props
+  const { TTT, setTTT, r, c, ws, boxSize } = props
   let state = TTT.grid[r][c]
   let grid = TTT.grid
   let player = TTT.player
@@ -44,17 +44,39 @@ const OneBox = props => {
             handleClick()
           }}
           className={TTT.allowedToPlay ? 'box empty' : 'box empty notallowed'}
+          style={{
+            height: boxSize + 'px',
+            width: boxSize + 'px'
+          }}
         ></div>
       )
 
     case 'O':
       if (state === 'O') {
         //Case cochée mais pas gagnante
-        return <div className='box O'>O</div>
+        return (
+          <div
+            className='box O'
+            style={{
+              height: boxSize + 'px',
+              width: boxSize + 'px',
+              fontSize: boxSize * 0.8 + 'px'
+            }}
+          >
+            O
+          </div>
+        )
       } else {
         // on est dans un cas gagnant
         return (
-          <div className='box WinO'>
+          <div
+            className='box WinO'
+            style={{
+              height: boxSize + 'px',
+              width: boxSize + 'px',
+              fontSize: boxSize * 0.8 + 'px'
+            }}
+          >
             {state.indexOf('C') !== -1 && <div className='barCol'></div>}
             {state.indexOf('R') !== -1 && <div className='barRow'></div>}
             {state.indexOf('D1') !== -1 && <div className='barD1'></div>}
@@ -65,11 +87,29 @@ const OneBox = props => {
 
     case 'X':
       if (state === 'X') {
-        return <div className='box X'>X</div>
+        return (
+          <div
+            className='box X'
+            style={{
+              height: boxSize + 'px',
+              width: boxSize + 'px',
+              fontSize: boxSize * 0.8 + 'px'
+            }}
+          >
+            X
+          </div>
+        )
       } else {
         // on est dans un cas gagnant
         return (
-          <div className='box WinX'>
+          <div
+            className='box WinX'
+            style={{
+              height: boxSize + 'px',
+              width: boxSize + 'px',
+              fontSize: boxSize * 0.8 + 'px'
+            }}
+          >
             {state.indexOf('C') !== -1 && <div className='barCol'></div>}
             {state.indexOf('R') !== -1 && <div className='barRow'></div>}
             {state.indexOf('D1') !== -1 && <div className='barD1'></div>}
@@ -78,7 +118,14 @@ const OneBox = props => {
         )
       }
     default:
-      return <div className='box empty'>error</div>
+      return (
+        <div
+          className='box empty'
+          style={{ height: boxSize + 'px', width: boxSize + 'px' }}
+        >
+          error
+        </div>
+      )
   }
 }
 

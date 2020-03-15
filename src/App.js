@@ -8,9 +8,9 @@ const App = () => {
   const [ws, setWs] = useState(null)
   const [instruction, setInstruction] = useState('Enter UserName')
   const [TTT, setTTT] = useState({
-    grid: thegrid(30),
+    grid: thegrid(12),
     player: null,
-    size: 15,
+    size: 12,
     victory: 4,
     scoreX: 0,
     scoreO: 0,
@@ -18,6 +18,13 @@ const App = () => {
     username: 'NoUsername Yet',
     opponent: 'NoOpponent Yet'
   })
+
+  // taille des cases en fonction de leur nombre
+  const boxSize =
+    window.innerWidth > 850
+      ? Math.floor((window.innerWidth * 0.4) / TTT.size)
+      : Math.floor((window.innerWidth - 30) / TTT.size)
+
   console.log(TTT)
 
   return (
@@ -41,6 +48,7 @@ const App = () => {
             setTTT={setTTT}
             ws={ws}
             setInstruction={setInstruction}
+            boxSize={boxSize}
           />
         </div>
       </div>

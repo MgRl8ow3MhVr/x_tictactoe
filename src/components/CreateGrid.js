@@ -1,8 +1,11 @@
 import React from 'react'
 import OneBox from './OneBox'
 
+console.log('h', window.innerHeight)
+console.log(window.innerWidth)
+
 const OneLine = props => {
-  const { TTT, setTTT, size, line, ws } = props
+  const { TTT, setTTT, size, line, ws, boxSize } = props
 
   let tab = []
   for (let i = 0; i < size; i++) {
@@ -14,6 +17,7 @@ const OneLine = props => {
         c={i}
         ws={ws}
         key={[line, i]}
+        boxSize={boxSize}
       ></OneBox>
     )
   }
@@ -22,7 +26,7 @@ const OneLine = props => {
 }
 
 const CreateGrid = props => {
-  const { TTT, setTTT, ws } = props
+  const { TTT, setTTT, ws, boxSize } = props
   let size = TTT.size
   let tab = []
   for (let i = 0; i < size; i++) {
@@ -34,6 +38,7 @@ const CreateGrid = props => {
         size={size}
         line={i}
         ws={ws}
+        boxSize={boxSize}
       ></OneLine>
     )
   }

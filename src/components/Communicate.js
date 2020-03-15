@@ -26,7 +26,6 @@ const Communicate = ({
 
       //ping the server otherwise heroku goes to sleep and the game is lost after 30s of inactivity
       setTimeout(() => {
-        console.log('ping')
         setInterval(() => {
           NewWs.send(JSON.stringify({ object: 'ping', player: TTT.username }))
         }, 15000)
