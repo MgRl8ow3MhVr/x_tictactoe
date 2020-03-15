@@ -26,6 +26,10 @@ header > span:last-child {
   font-size: 1.2rem;
 }
 
+footer {
+  height: 20px;
+}
+
 /* # # # # # # # game MENU # # # # # # # # # */
 
 .menu {
@@ -332,11 +336,17 @@ h1 {
   .menu {
     width: 95vw;
   }
+  footer {
+    height: 8px;
+  }
 
   header {
-    margin: 15px;
+    margin: 5px;
   }
   header > span:first-child {
     font-size: 2rem;
+  }
+  .menu {
+    margin-bottom: 5px;
   }
 }

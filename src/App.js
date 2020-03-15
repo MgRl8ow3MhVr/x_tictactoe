@@ -52,6 +52,7 @@ const App = () => {
           />
         </div>
       </div>
+      <footer />
     </div>
   )
 }
