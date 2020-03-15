@@ -18,8 +18,8 @@ const Communicate = ({
   // # # # # # # # # # # # Connexion at WS Server on page landing # # # # # # # # # # #
   useEffect(() => {
     const connection = async () => {
-      // const NewWs = new WebSocket('wss://backendtictactoe.herokuapp.com/')
-      const NewWs = new WebSocket('ws://localhost:8080')
+      const NewWs = new WebSocket('wss://backendtictactoe.herokuapp.com/')
+      // const NewWs = new WebSocket('ws://localhost:8080')
       setWs(NewWs)
 
       //ping the server otherwise heroku goes to sleep and the game is lost after 30s of inactivity
