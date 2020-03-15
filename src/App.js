@@ -22,7 +22,7 @@ const App = () => {
   // taille des cases en fonction de leur nombre
   const boxSize =
     window.innerWidth > 850
-      ? Math.floor((window.innerWidth * 0.4) / TTT.size)
+      ? Math.floor((window.innerWidth * 0.38) / TTT.size)
       : Math.floor((window.innerWidth - 30) / TTT.size)
 
   console.log(TTT)
