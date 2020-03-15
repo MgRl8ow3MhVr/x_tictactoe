@@ -11,7 +11,8 @@ const OneBox = props => {
     if (!TTT.allowedToPlay) {
       return
     }
-    grid[r][c] = player
+
+    grid[r][c] = player //Player, Loose (notwin), R,C,D1,D2
     const gridwin = checkWin(grid, r, c, player, TTT.victory)
     let newTTT
     if (gridwin) {
@@ -35,8 +36,8 @@ const OneBox = props => {
     ws.send(JSON.stringify(newTTT))
   }
 
-  switch (state) {
-    case -10:
+  switch (state[0]) {
+    case 'E': //Empty Cell
       return (
         <div
           onClick={() => {
@@ -45,20 +46,37 @@ const OneBox = props => {
           className={TTT.allowedToPlay ? 'box empty' : 'box empty notallowed'}
         ></div>
       )
-    case 'WinR_O':
-    case 'WinC_O':
-    case 'WinD1_O':
-    case 'WinD2_O':
-      return <div className='box WinO'>O</div>
-    case 'WinR_X':
-    case 'WinC_X':
-    case 'WinD1_X':
-    case 'WinD2_X':
-      return <div className='box WinX'>X</div>
+
     case 'O':
-      return <div className='box O'>O</div>
+      if (state === 'O') {
+        //Case cochée mais pas gagnante
+        return <div className='box O'>O</div>
+      } else {
+        // on est dans un cas gagnant
+        return (
+          <div className='box WinO'>
+            {state.indexOf('C') !== -1 && <div className='barCol'></div>}
+            {state.indexOf('R') !== -1 && <div className='barRow'></div>}
+            {state.indexOf('D1') !== -1 && <div className='barD1'></div>}
+            {state.indexOf('D2') !== -1 && <div className='barD2'></div>}O
+          </div>
+        )
+      }
+
     case 'X':
-      return <div className='box X'>X</div>
+      if (state === 'X') {
+        return <div className='box X'>X</div>
+      } else {
+        // on est dans un cas gagnant
+        return (
+          <div className='box WinX'>
+            {state.indexOf('C') !== -1 && <div className='barCol'></div>}
+            {state.indexOf('R') !== -1 && <div className='barRow'></div>}
+            {state.indexOf('D1') !== -1 && <div className='barD1'></div>}
+            {state.indexOf('D2') !== -1 && <div className='barD2'></div>}X
+          </div>
+        )
+      }
     default:
       return <div className='box empty'>error</div>
   }

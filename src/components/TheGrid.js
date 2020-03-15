@@ -1,13 +1,13 @@
 const thegrid = size => {
-  let tab = [];
+  let tab = []
   for (let i = 0; i < size; i++) {
-    let subtab = [];
+    let subtab = []
     for (let j = 0; j < size; j++) {
-      subtab.push(-10);
+      subtab.push('E')
     }
-    tab.push(subtab);
+    tab.push(subtab)
   }
-  return tab;
-};
+  return tab
+}
 
-export default thegrid;
+export default thegrid

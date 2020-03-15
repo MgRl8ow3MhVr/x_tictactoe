@@ -4,12 +4,11 @@ const checkRows = (grid, r, c, player, victorynum) => {
   const size = grid[0].length
   let victory = []
   // ReUse winner case as victory if it's not a Row Victory
+  // it's not a Row Victory if it doesn't include 'R' inside name
   const countsAsVictory = (r, c) => {
     return (
-      grid[r][c] === player ||
-      grid[r][c] === 'WinC_' + player ||
-      grid[r][c] === 'WinD1_' + player ||
-      grid[r][c] === 'WinD2_' + player
+      // Si contient le nom du player MAIS ne contient pas R
+      grid[r][c].indexOf(player) !== -1 && grid[r][c].indexOf('R') === -1
     )
   }
 
@@ -39,10 +38,11 @@ const checkRows = (grid, r, c, player, victorynum) => {
   //Check Total
   if (sumRight + sumLeft >= victorynum - 1) {
     victory.map(el => {
-      grid[el[0]][el[1]] = 'WinR_' + player
+      grid[el[0]][el[1]] = grid[el[0]][el[1]] + 'R'
       return null
     })
-    grid[r][c] = 'WinR_' + player
+    // cette case ne pouvait pas etre gagnante avant.
+    grid[r][c] = player + 'R'
 
     return grid
   }
@@ -56,12 +56,7 @@ const checkCols = (grid, r, c, player, victorynum) => {
   let victory = []
   // ReUse winner case as victory if it's not a Row Victory
   const countsAsVictory = (r, c) => {
-    return (
-      grid[r][c] === player ||
-      grid[r][c] === 'WinR_' + player ||
-      grid[r][c] === 'WinD1_' + player ||
-      grid[r][c] === 'WinD2_' + player
-    )
+    return grid[r][c].indexOf(player) !== -1 && grid[r][c].indexOf('C') === -1
   }
 
   //check up
@@ -89,10 +84,10 @@ const checkCols = (grid, r, c, player, victorynum) => {
   //Check Total
   if (sumUp + sumDown >= victorynum - 1) {
     victory.map(el => {
-      grid[el[0]][el[1]] = 'WinC_' + player
+      grid[el[0]][el[1]] = grid[el[0]][el[1]] + 'C'
       return null
     })
-    grid[r][c] = 'WinC_' + player
+    grid[r][c] = player + 'C'
 
     return grid
   }
@@ -107,12 +102,7 @@ const checkdiag1 = (grid, r, c, player, victorynum) => {
 
   // ReUse winner case as victory
   const countsAsVictory = (r, c) => {
-    return (
-      grid[r][c] === player ||
-      grid[r][c] === 'WinR_' + player ||
-      grid[r][c] === 'WinC_' + player ||
-      grid[r][c] === 'WinD2_' + player
-    )
+    return grid[r][c].indexOf(player) !== -1 && grid[r][c].indexOf('D1') === -1
   }
 
   //check up
@@ -144,10 +134,10 @@ const checkdiag1 = (grid, r, c, player, victorynum) => {
   //Check Total
   if (sumUp + sumDown >= victorynum - 1) {
     victory.map(el => {
-      grid[el[0]][el[1]] = 'WinD1_' + player
+      grid[el[0]][el[1]] = grid[el[0]][el[1]] + 'D1'
       return null
     })
-    grid[r][c] = 'WinD1_' + player
+    grid[r][c] = player + 'D1'
 
     return grid
   }
@@ -161,12 +151,7 @@ const checkdiag2 = (grid, r, c, player, victorynum) => {
   let victory = []
   // ReUse winner case as victory
   const countsAsVictory = (r, c) => {
-    return (
-      grid[r][c] === player ||
-      grid[r][c] === 'WinR_' + player ||
-      grid[r][c] === 'WinC_' + player ||
-      grid[r][c] === 'WinD1_' + player
-    )
+    return grid[r][c].indexOf(player) !== -1 && grid[r][c].indexOf('D2') === -1
   }
 
   //check up
@@ -202,10 +187,10 @@ const checkdiag2 = (grid, r, c, player, victorynum) => {
   //Check Total
   if (sumUp + sumDown >= victorynum - 1) {
     victory.map(el => {
-      grid[el[0]][el[1]] = 'WinD2_' + player
+      grid[el[0]][el[1]] = grid[el[0]][el[1]] + 'D2'
       return null
     })
-    grid[r][c] = 'WinD2_' + player
+    grid[r][c] = player + 'D2'
 
     return grid
   }
