@@ -123,6 +123,7 @@ h4 {
   color: white;
   width: 100%;
   text-align: center;
+  cursor: pointer;
 }
 h4:hover {
   cursor: pointer;
