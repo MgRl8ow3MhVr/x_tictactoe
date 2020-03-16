@@ -6,7 +6,9 @@ import './App.css'
 
 const App = () => {
   const [ws, setWs] = useState(null)
-  const [instruction, setInstruction] = useState('Enter UserName')
+  const [instruction, setInstruction] = useState(
+    'Type UserName and press Enter'
+  )
   const [TTT, setTTT] = useState({
     grid: thegrid(12),
     player: null,
