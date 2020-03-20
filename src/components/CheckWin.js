@@ -16,7 +16,7 @@ const checkRows = (grid, r, c, player, victorynum) => {
   let currCol = c + 1
   let sumRight = 0
 
-  while (countsAsVictory(r, currCol) && currCol < size) {
+  while (currCol < size && countsAsVictory(r, currCol)) {
     sumRight += 1
     victory.push([r, currCol])
     currCol++
@@ -26,8 +26,8 @@ const checkRows = (grid, r, c, player, victorynum) => {
   let sumLeft = 0
   // Player && Not at the TopYet && sum is not already good
   while (
-    countsAsVictory(r, currCol) &&
     currCol >= 0 &&
+    countsAsVictory(r, currCol) &&
     sumRight + sumLeft < victorynum - 1
   ) {
     sumLeft += 1
